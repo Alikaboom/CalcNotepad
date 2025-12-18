@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.calcnotepad.HelloController">
+    <top>
+        <VBox styleClass="top-section">
+            <MenuBar styleClass="menu-bar">
+                <Menu text="File">
+                    <MenuItem onAction="#handleNew" text="New">
+                        <graphic><Region styleClass="menu-icon-new" /></graphic>
+                    </MenuItem>
+                    <MenuItem onAction="#handleOpen" text="Open">
+                        <graphic><Region styleClass="menu-icon-open" /></graphic>
+                    </MenuItem>
+                    <MenuItem onAction="#handleSave" text="Save">
+                        <graphic><Region styleClass="menu-icon-save" /></graphic>
+                    </MenuItem>
+                                            <SeparatorMenuItem />
+                    <MenuItem onAction="#handleExit" text="Exit">
+                        <graphic><Region styleClass="menu-icon-exit" /></graphic>
+                    </MenuItem>
+                </Menu>
+                <Menu text="Edit">
+                    <MenuItem onAction="#handleUndo" text="Undo">
+                        <graphic><Region styleClass="menu-icon-undo" /></graphic>
+                    </MenuItem>
+                    <MenuItem onAction="#handleRedo" text="Redo">
+                        <graphic><Region styleClass="menu-icon-redo" /></graphic>
+                    </MenuItem>
+                    <SeparatorMenuItem />
+                    <MenuItem onAction="#handleClear" text="Clear All">
+                        <graphic><Region styleClass="menu-icon-clear" /></graphic>
+                    </MenuItem>
+                </Menu>
+                <Menu text="View">
+                    <MenuItem onAction="#handleZoomIn" text="Zoom In">
+                        <graphic><Region styleClass="menu-icon-zoom-in" /></graphic>
+                    </MenuItem>
+                    <MenuItem onAction="#handleZoomOut" text="Zoom Out">
+                        <graphic><Region styleClass="menu-icon-zoom-out" /></graphic>
+                    </MenuItem>
+                    <SeparatorMenuItem />
+                    <MenuItem onAction="#handleResetZoom" text="Reset Zoom">
+                        <graphic><Region styleClass="menu-icon-reset" /></graphic>
+                    </MenuItem>
+                </Menu>
+            </MenuBar>
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="toolbar">
+                <padding>
+                    <Insets bottom="5" left="10" right="10" top="5" />
+                </padding>
+                <VBox spacing="3" styleClass="tool-section">
+                    <Label styleClass="section-label" text="Tools" />
+                    <HBox spacing="5">
+                        <ToggleButton fx:id="pencilBtn" onAction="#handlePencilTool" styleClass="tool-button">
+                            <graphic>
+                                <Region styleClass="icon-pencil" />
+                            </graphic>
+                            <tooltip><Tooltip text="Pencil (Draw)" /></tooltip>
+                        </ToggleButton>
+                        <ToggleButton fx:id="eraserBtn" onAction="#handleEraserTool" styleClass="tool-button">
+                            <graphic>
+                                <Region styleClass="icon-eraser" />
+                            </graphic>
+                            <tooltip><Tooltip text="Eraser" /></tooltip>
+                        </ToggleButton>
+                        <ToggleButton fx:id="selectBtn" onAction="#handleSelectTool" styleClass="tool-button">
+                            <graphic>
+                                <Region styleClass="icon-line" />
+                            </graphic>
+                            <tooltip><Tooltip text="Line Tool" /></tooltip>
+                        </ToggleButton>
+                    </HBox>
+                </VBox>
+                <Separator orientation="VERTICAL" />
+                <VBox spacing="3" styleClass="tool-section">
+                    <Label styleClass="section-label" text="Brush Size" />
+                    <HBox alignment="CENTER_LEFT" spacing="5">
+                        <Region styleClass="icon-brush" />
+                        <Slider fx:id="brushSizeSlider" max="20" min="5.0" prefWidth="100" styleClass="brush-slider" value="7.0" />
+                        <Label fx:id="brushSizeLabel" styleClass="size-label" text="7px" />
+                    </HBox>
+                </VBox>
+                <Separator orientation="VERTICAL" />
+                <VBox spacing="3" styleClass="color-section">
+                    <Label styleClass="section-label" text="Colors" />
+                    <HBox spacing="3" styleClass="color-palette">
+                        <HBox spacing="2">
+                            <Circle fx:id="color1" fill="#FFFFFF" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color2" fill="#808080" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color3" fill="#800000" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color4" fill="#FF0000" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color5" fill="#FFA500" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color6" fill="#FFFF00" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color7" fill="#00FF00" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color8" fill="#00FFFF" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color9" fill="#0000FF" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color10" fill="#FF00FF" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                        </HBox>
+                    </HBox>
+                    <HBox spacing="3">
+                        <HBox spacing="2">
+                            <Circle fx:id="color11" fill="#000000" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color12" fill="#C0C0C0" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color13" fill="#8B4513" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color14" fill="#FFB6C1" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color15" fill="#FFD700" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color16" fill="#90EE90" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color17" fill="#98FB98" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color18" fill="#87CEEB" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color19" fill="#4169E1" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                            <Circle fx:id="color20" fill="#9370DB" onMouseClicked="#handleColorPick" radius="12" stroke="#000000" styleClass="color-circle" />
+                        </HBox>
+                    </HBox>
+                </VBox>
+                <Separator orientation="VERTICAL" />
+                <VBox spacing="3" styleClass="tool-section">
+                    <Label styleClass="section-label" text="Current" />
+                    <HBox alignment="CENTER" spacing="5">
+                        <StackPane styleClass="color-display-container">
+                            <Circle fx:id="currentColorDisplay" fill="#000000" radius="15" stroke="#000000" strokeWidth="2" />
+                        </StackPane>
+                    </HBox>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <VBox alignment="CENTER_RIGHT" spacing="5" styleClass="action-section">
+                    <Label styleClass="section-label" text="Actions" />
+                    <HBox spacing="5">
+                        <Button fx:id="undoButton" onAction="#handleUndo" styleClass="action-button">
+                            <graphic>
+                                <StackPane>
+                                    <SVGPath content="M 12 5 A 7 7 0 1 0 19 12" fill="TRANSPARENT" stroke="#0099ff" strokeLineCap="ROUND" strokeWidth="4" />
+                                    <SVGPath content="M 12 0 L 12 8 L 6 4 Z" fill="#0099ff" stroke="TRANSPARENT" />
+                                </StackPane>
+                            </graphic>
+                            <tooltip><Tooltip text="Undo" /></tooltip>
+                        </Button>
+                        <Button fx:id="redoButton" onAction="#handleRedo" styleClass="action-button">
+                            <graphic>
+                                <StackPane scaleX="-1">
+                                    <SVGPath content="M 12 5 A 7 7 0 1 0 19 12" fill="TRANSPARENT" stroke="#0099ff" strokeLineCap="ROUND" strokeWidth="4" />
+                                    <SVGPath content="M 12 0 L 12 8 L 6 4 Z" fill="#0099ff" stroke="TRANSPARENT" />
+                                </StackPane>
+                            </graphic>
+                            <tooltip><Tooltip text="Redo" /></tooltip>
+                        </Button>
+                        <Button onAction="#handleCalculateOCR" styleClass="action-button" text="Calculate">
+                            <graphic>
+                                <SVGPath content="M 5 3 H 19 A 2 2 0 0 1 21 5 V 19 A 2 2 0 0 1 19 21 H 5 A 2 2 0 0 1 3 19 V 5 A 2 2 0 0 1 5 3 Z M 6 6 H 18 V 10 H 6 V 6 Z M 6 13 H 9 V 16 H 6 V 13 Z M 11 13 H 14 V 16 H 11 V 13 Z M 16 13 H 18 V 18 H 16 V 13 Z" fill="TRANSPARENT" stroke="#333333" strokeWidth="1.5" />
+                            </graphic>
+                            <tooltip><Tooltip text="Convert handwriting to math" /></tooltip>
+                        </Button>
+                    </HBox>
+                </VBox>
+            </HBox>
+        </VBox>
+    </top>
+    <left>
+        <VBox spacing="10" styleClass="left-sidebar">
+            <padding>
+                <Insets bottom="10" left="5" right="5" top="10" />
+            </padding>
+            <VBox spacing="5" styleClass="quick-actions">
+                <Button maxWidth="Infinity" onAction="#handleClear" text="Clear Board">
+                    <graphic><Region styleClass="icon-trash" /></graphic>
+                    <tooltip><Tooltip text="Clear entire canvas" /></tooltip>
+                </Button>
+                <Button maxWidth="Infinity" onAction="#handleNew" styleClass="sidebar-button" text="New Page">
+                    <graphic><Region styleClass="icon-new-page" /></graphic>
+                    <tooltip><Tooltip text="Create new blank page" /></tooltip>
+                </Button>
+                <Button maxWidth="Infinity" onAction="#handleSave" styleClass="sidebar-button" text="Save">
+                    <graphic><Region styleClass="icon-save-sidebar" /></graphic>
+                    <tooltip><Tooltip text="Save current drawing" /></tooltip>
+                </Button>
+            </VBox>
+            <Separator />
+            <VBox spacing="5" styleClass="history-section" VBox.vgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="5">
+                    <Region styleClass="icon-clipboard" />
+                    <Label styleClass="history-title" text="Calculation History" />
+                </HBox>
+                <ScrollPane fitToWidth="true" styleClass="history-scroll" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="historyContainer" spacing="5" styleClass="history-container">
+                        <padding>
+                            <Insets bottom="5" left="5" right="5" top="5" />
+                        </padding>
+                        <Label styleClass="empty-history-label" text="No calculations yet" />
+                    </VBox>
+                </ScrollPane>
+                <Button maxWidth="Infinity" onAction="#handleClearHistory"  text="Clear History">
+                    <graphic><Region styleClass="icon-clear-small" /></graphic>
+                </Button>
+            </VBox>
+        </VBox>
+    </left>
+    <center>
+        <StackPane styleClass="canvas-container">
+            <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="canvas-scroll">
+                <StackPane>
+                    <Canvas fx:id="canvas" height="800" onMouseDragged="#handleMouseDragged" onMousePressed="#handleMousePressed" onMouseReleased="#handleMouseReleased" width="1200" />
+                </StackPane>
+            </ScrollPane>
+        </StackPane>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="status-bar">
+            <padding>
+                <Insets bottom="3" left="10" right="10" top="3" />
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Region styleClass="icon-info" />
+                <Label fx:id="statusLabel" text="Ready" />
+            </HBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Region styleClass="icon-mouse" />
+                <Label fx:id="coordinatesLabel" text="X: 0, Y: 0" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Region styleClass="icon-zoom-status" />
+                <Label fx:id="zoomLabel" text="100%" />
+            </HBox>
+        </HBox>
+    </bottom>
+</BorderPane>
